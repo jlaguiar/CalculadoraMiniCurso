@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnApagar;
 
     private TextView txtPrincipal;
+    private TextView txtResposta;
 
     public String txtAuxParaExibir;
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         btnApagar = findViewById(R.id.id_btn_apagar);
 
         txtPrincipal = findViewById(R.id.id_txt_principal);
+        txtResposta = findViewById(R.id.id_txt_resposta);
         txtAuxParaExibir = "";
 
 
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         btnDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " / ";
+                txtAuxParaExibir = txtAuxParaExibir + "/";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -157,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         btnMultiplicacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " * ";
+                txtAuxParaExibir = txtAuxParaExibir + "*";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubtracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " - ";
+                txtAuxParaExibir = txtAuxParaExibir + "-";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -173,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdicicao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " + ";
+                txtAuxParaExibir = txtAuxParaExibir + "+";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -189,13 +191,17 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtPrincipal.setText(String.valueOf(EvaluateString.evaluate(txtPrincipal.getText().toString())));
+                txtResposta.setText(String.valueOf(EvaluateString.evaluate(txtPrincipal.getText().toString())));
             }
         });
 
         btnApagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (txtAuxParaExibir.length() > 0){
+                    txtAuxParaExibir = txtAuxParaExibir.substring(0,txtAuxParaExibir.length()-1);
+                    txtPrincipal.setText(txtAuxParaExibir);
+                }
 
             }
         });
