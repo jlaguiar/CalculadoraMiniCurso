@@ -3,13 +3,10 @@ package com.jlaguiar.calculadoraminicurso;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.jlaguiar.calculadoraminicurso.Algorithms.EvaluateString;
-
-import javax.script.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
         txtAuxParaExibir = "";
 
 
-        //Configuração
-        txtPrincipal.setMovementMethod(new ScrollingMovementMethod());
         //Ação do botao ao ser clicado
         btnNumero0.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtPrincipal.setText(EvaluateString.evaluate(txtPrincipal.getText().toString()));
+                txtPrincipal.setText(String.valueOf(EvaluateString.evaluate(txtPrincipal.getText().toString())));
             }
         });
 

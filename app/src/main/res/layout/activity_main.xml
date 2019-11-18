@@ -175,7 +175,8 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/id_btn_apagar"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:scrollHorizontally="true"/>
 
     <Button
         android:id="@+id/id_btn_apagar"
