@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.jlaguiar.calculadoraminicurso.Algorithms.EvaluateString;
 
-import javax.script.*;
-
 public class MainActivity extends AppCompatActivity {
 
     private Button btnNumero0;
@@ -187,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtPrincipal.setText(EvaluateString.evaluate(txtPrincipal.getText().toString()));
+                txtPrincipal.setText(String.valueOf(EvaluateString.evaluate(txtPrincipal.getText().toString())))git pull;
             }
         });
 
