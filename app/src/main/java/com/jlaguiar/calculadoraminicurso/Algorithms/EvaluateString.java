@@ -3,11 +3,11 @@ package com.jlaguiar.calculadoraminicurso.Algorithms;
 import java.util.Stack;
 
 public class EvaluateString {
-    public static int evaluate(String expression) {
+    public static Float evaluate(String expression) {
         char[] tokens = expression.toCharArray();
 
         // Stack for numbers: 'values'
-        Stack<Integer> values = new Stack<Integer>();
+        Stack<Float> values = new Stack<Float>();
 
         // Stack for Operators: 'ops'
         Stack<Character> ops = new Stack<Character>();
@@ -23,7 +23,7 @@ public class EvaluateString {
                 // There may be more than one digits in number
                 while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
                     sbuf.append(tokens[i++]);
-                values.push(Integer.parseInt(sbuf.toString()));
+                values.push(Float.parseFloat(sbuf.toString()));
             }
 
             // Current token is an opening brace, push it to 'ops'
@@ -73,7 +73,7 @@ public class EvaluateString {
 
     // A utility method to apply an operator 'op' on operands 'a'
     // and 'b'. Return the result.
-    public static int applyOp(char op, int b, int a) {
+    public static float applyOp(char op, float b, float a) {
         switch (op) {
             case '+':
                 return a + b;

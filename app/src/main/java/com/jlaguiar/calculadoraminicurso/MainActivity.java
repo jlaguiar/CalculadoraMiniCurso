@@ -1,11 +1,12 @@
 package com.jlaguiar.calculadoraminicurso;
 
-import androidx.appcompat.app.AppCompatActivity;
+
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
 import com.jlaguiar.calculadoraminicurso.Algorithms.EvaluateString;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
     private Button btnDivisao;
     private Button btnMultiplicacao;
 
+    private Button btnAbreParenteses;
+    private Button btnFechaParenteses;
+    private Button btnClear;
     private Button btnVirgula;
     private Button btnIgual;
 
+    private Button btnApagar;
+
     private TextView txtPrincipal;
+    private TextView txtResposta;
 
     public String txtAuxParaExibir;
 
@@ -55,11 +62,18 @@ public class MainActivity extends AppCompatActivity {
         btnSubtracao = findViewById(R.id.id_btn_subtracao);
         btnAdicicao = findViewById(R.id.id_btn_adicao);
 
+        btnAbreParenteses = findViewById(R.id.id_btn_abre_parenteses);
+        btnFechaParenteses = findViewById(R.id.id_btn_fecha_parenteses);
+        btnClear = findViewById(R.id.id_btn_clear);
         btnVirgula = findViewById(R.id.id_btn_virgula);
         btnIgual = findViewById(R.id.id_btn_igual);
 
+        btnApagar = findViewById(R.id.id_btn_apagar);
+
         txtPrincipal = findViewById(R.id.id_txt_principal);
+        txtResposta = findViewById(R.id.id_txt_resposta);
         txtAuxParaExibir = "";
+
 
         //Ação do botao ao ser clicado
         btnNumero0.setOnClickListener(new View.OnClickListener() {
@@ -145,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
         btnDivisao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " / ";
+                txtAuxParaExibir = txtAuxParaExibir + "/";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -153,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         btnMultiplicacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " * ";
+                txtAuxParaExibir = txtAuxParaExibir + "*";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -161,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         btnSubtracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " - ";
+                txtAuxParaExibir = txtAuxParaExibir + "-";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -169,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         btnAdicicao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + " + ";
+                txtAuxParaExibir = txtAuxParaExibir + "+";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -177,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
         btnVirgula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtAuxParaExibir = txtAuxParaExibir + ",";
+                txtAuxParaExibir = txtAuxParaExibir + ".";
                 txtPrincipal.setText(txtAuxParaExibir);
             }
         });
@@ -185,7 +199,51 @@ public class MainActivity extends AppCompatActivity {
         btnIgual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtPrincipal.setText(String.valueOf(EvaluateString.evaluate(txtPrincipal.getText().toString())))git pull;
+                try {
+                    Float result = EvaluateString.evaluate(txtAuxParaExibir.replace("-", " - ").replace("+", " + ").replace("*", " * ").replace("/", " / ").replace("(", " ( ").replace(")", " ) "));
+                    txtResposta.setText(String.valueOf(result));
+                    if (Integer.parseInt(String.valueOf(result).replace(".", "")) / 10 == result) {
+                        txtResposta.setText(String.valueOf(Integer.parseInt(String.valueOf(result).replace(".", "")) / 10));
+                    }
+                }catch(Exception e){
+                    txtResposta.setText("Invalid syntax");
+                }
+            }
+        });
+
+        btnApagar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (txtAuxParaExibir.length() > 0){
+                    txtAuxParaExibir = txtAuxParaExibir.substring(0,txtAuxParaExibir.length()-1);
+                    txtPrincipal.setText(txtAuxParaExibir);
+                }
+
+            }
+        });
+
+        btnAbreParenteses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtAuxParaExibir = txtAuxParaExibir + "(";
+                txtPrincipal.setText(txtAuxParaExibir);
+            }
+        });
+
+        btnFechaParenteses.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtAuxParaExibir = txtAuxParaExibir + ")";
+                txtPrincipal.setText(txtAuxParaExibir);
+            }
+        });
+
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtAuxParaExibir = "";
+                txtPrincipal.setText("");
+                txtResposta.setText("");
             }
         });
 
