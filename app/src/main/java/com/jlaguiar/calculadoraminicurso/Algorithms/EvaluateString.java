@@ -23,7 +23,20 @@ public class EvaluateString {
                 // There may be more than one digits in number
                 while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
                     sbuf.append(tokens[i++]);
-                values.push(Float.parseFloat(sbuf.toString()));
+
+                if (i < tokens.length && tokens[i] == '.') {
+                    sbuf.append(tokens[i]);
+                    i++;
+                    if (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9'){
+                        while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9')
+                            sbuf.append(tokens[i++]);
+
+                        values.push(Float.parseFloat(sbuf.toString()));
+                    }
+
+                }else{
+                    values.push(Float.parseFloat(sbuf.toString()));
+                }
             }
 
             // Current token is an opening brace, push it to 'ops'

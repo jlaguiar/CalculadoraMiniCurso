@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         txtResposta.setText(String.valueOf(Integer.parseInt(String.valueOf(result).replace(".", "")) / 10));
                     }
                 }catch(Exception e){
-                    txtResposta.setText("Invalid syntax");
+                    txtResposta.setText("Error");
                 }
             }
         });
